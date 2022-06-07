@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:09 by yichoi           ###   ########.fr       */
+/*   Created: 2021/12/05 19:38:02 by yichoi            #+#    #+#             */
+/*   Updated: 2021/12/09 17:15:39 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char **envp)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int		fd[2];
-	pid_t	pid;
+	size_t	len;
 
-	if (argc != 5)
-		ft_error(BAG);
-	if (pipe(fd) == -1)
-		ft_error(ERR);
-	pid = fork();
-	if (pid == -1)
-		ft_error(ERR);
-	else if (pid == 0)
-		child_process(fd, argv, envp);
-	else
-	{
-		waitpid(pid, 0, 0);
-		parents_process(fd, argv, envp);
-	}
-	close(fd[0]);
-	close(fd[1]);
-
-	return (0);
+	if (!s || fd < 0)
+		return ;
+	len = ft_strlen(s);
+	write(fd, s, len);
+	write(fd, "\n", 1);
 }

@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:09 by yichoi           ###   ########.fr       */
+/*   Created: 2021/11/24 20:53:25 by yichoi            #+#    #+#             */
+/*   Updated: 2021/12/06 20:10:39 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char **envp)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		fd[2];
-	pid_t	pid;
+	const unsigned char	*ptr;
 
-	if (argc != 5)
-		ft_error(BAG);
-	if (pipe(fd) == -1)
-		ft_error(ERR);
-	pid = fork();
-	if (pid == -1)
-		ft_error(ERR);
-	else if (pid == 0)
-		child_process(fd, argv, envp);
-	else
+	ptr = NULL;
+	while (*s)
 	{
-		waitpid(pid, 0, 0);
-		parents_process(fd, argv, envp);
+		if (*s == (unsigned char)c)
+			ptr = (const unsigned char *)s;
+		s++;
 	}
-	close(fd[0]);
-	close(fd[1]);
-
-	return (0);
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	else if (ptr == NULL)
+		return (NULL);
+	else
+		return ((char *)ptr);
 }

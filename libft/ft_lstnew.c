@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:09 by yichoi           ###   ########.fr       */
+/*   Created: 2021/12/05 19:51:14 by yichoi            #+#    #+#             */
+/*   Updated: 2021/12/05 21:16:05 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char **envp)
+t_list	*ft_lstnew(void *content)
 {
-	int		fd[2];
-	pid_t	pid;
+	t_list	*lst;
 
-	if (argc != 5)
-		ft_error(BAG);
-	if (pipe(fd) == -1)
-		ft_error(ERR);
-	pid = fork();
-	if (pid == -1)
-		ft_error(ERR);
-	else if (pid == 0)
-		child_process(fd, argv, envp);
-	else
-	{
-		waitpid(pid, 0, 0);
-		parents_process(fd, argv, envp);
-	}
-	close(fd[0]);
-	close(fd[1]);
-
-	return (0);
+	lst = (t_list *)malloc(sizeof(t_list));
+	if (!lst)
+		return (NULL);
+	lst->content = content;
+	lst->next = NULL;
+	return (lst);
 }

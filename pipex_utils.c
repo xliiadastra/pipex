@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:45:58 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/04 20:53:20 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/07 21:57:06 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,18 @@ void	ft_error(int mode)
 		write(2, "Example: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 46);
 		exit(1);
 	}
+}
+
+void	str_isfree(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		free(str[i]);
+		str[i] = NULL;
+	}
+	free(str);
+	str = NULL;
 }

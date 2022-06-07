@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:09 by yichoi           ###   ########.fr       */
+/*   Created: 2021/12/05 21:18:50 by yichoi            #+#    #+#             */
+/*   Updated: 2021/12/05 21:46:41 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char **envp)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int		fd[2];
-	pid_t	pid;
-
-	if (argc != 5)
-		ft_error(BAG);
-	if (pipe(fd) == -1)
-		ft_error(ERR);
-	pid = fork();
-	if (pid == -1)
-		ft_error(ERR);
-	else if (pid == 0)
-		child_process(fd, argv, envp);
-	else
-	{
-		waitpid(pid, 0, 0);
-		parents_process(fd, argv, envp);
-	}
-	close(fd[0]);
-	close(fd[1]);
-
-	return (0);
+	if (!lst)
+		return ;
+	if (*lst)
+		new->next = *lst;
+	*lst = new;
 }

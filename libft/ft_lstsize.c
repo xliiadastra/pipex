@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:09 by yichoi           ###   ########.fr       */
+/*   Created: 2021/12/06 17:08:21 by yichoi            #+#    #+#             */
+/*   Updated: 2021/12/10 19:19:16 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char **envp)
+int	ft_lstsize(t_list *lst)
 {
-	int		fd[2];
-	pid_t	pid;
+	int		count;
+	t_list	*ptr;
 
-	if (argc != 5)
-		ft_error(BAG);
-	if (pipe(fd) == -1)
-		ft_error(ERR);
-	pid = fork();
-	if (pid == -1)
-		ft_error(ERR);
-	else if (pid == 0)
-		child_process(fd, argv, envp);
-	else
+	if (!lst)
+		return (0);
+	count = 1;
+	ptr = lst;
+	while (lst->next)
 	{
-		waitpid(pid, 0, 0);
-		parents_process(fd, argv, envp);
+		lst = lst->next;
+		count++;
 	}
-	close(fd[0]);
-	close(fd[1]);
-
-	return (0);
+	lst = ptr;
+	return (count);
 }

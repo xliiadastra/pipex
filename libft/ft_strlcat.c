@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:09 by yichoi           ###   ########.fr       */
+/*   Created: 2021/11/16 16:33:11 by yichoi            #+#    #+#             */
+/*   Updated: 2021/12/06 20:03:37 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char **envp)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int		fd[2];
-	pid_t	pid;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	i;
 
-	if (argc != 5)
-		ft_error(BAG);
-	if (pipe(fd) == -1)
-		ft_error(ERR);
-	pid = fork();
-	if (pid == -1)
-		ft_error(ERR);
-	else if (pid == 0)
-		child_process(fd, argv, envp);
-	else
+	i = 0;
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (dstsize <= dst_len)
+		return (src_len + dstsize);
+	while (src[i] && dst_len + i + 1 < dstsize)
 	{
-		waitpid(pid, 0, 0);
-		parents_process(fd, argv, envp);
+		dst[dst_len + i] = src[i];
+		i++;
 	}
-	close(fd[0]);
-	close(fd[1]);
-
-	return (0);
+	dst[dst_len + i] = '\0';
+	return (dst_len + src_len);
 }
