@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:57:50 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 22:41:30 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/09 18:03:25 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include "./libft/libft.h"
-# include "libft.h"
+
 typedef enum e_error
 {
 	ERR,
