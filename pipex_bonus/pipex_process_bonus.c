@@ -6,18 +6,31 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 20:21:33 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 22:48:36 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 00:14:59 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	here_doc(int i, char *c, int r)
+void	here_doc(int fd, char *limiter, int argc)
 {
-	(void)i;
-	(void)c;
-	(void)r;
-	exit(1);
+	char	*ptr;
+
+	if (argc < 6)
+		ft_error(BAG);
+	while (1)
+	{
+		ptr = get_next_line(STDIN_FILENO);
+		if (!ft_strncmp(ptr, limiter, ft_strlen(limiter)))
+		{
+			free(ptr);
+			break ;
+		}
+		write(fd, ptr, ft_strlen(ptr));
+		free(ptr);
+	}
+	close(fd);
+	fd = open("infile_temp", O_RDONLY, 0777);
 }
 
 void	execvision(char *argv, char **envp)

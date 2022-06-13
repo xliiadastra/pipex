@@ -6,7 +6,7 @@
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 15:18:40 by yichoi            #+#    #+#              #
-#    Updated: 2022/06/13 22:49:11 by yichoi           ###   ########.fr        #
+#    Updated: 2022/06/13 23:55:52 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ RM			= rm
 RMFLAGS		= -f
 
 INCLUDES	= ./pipex.h			\
-			  ./pipex_bonus/pipex_bonus.h
+			  ./pipex_bonus/pipex_bonus.h	\
+			  ./pipex_bonus/get_next_line.h
 
 SRCS		=	pipex.c					\
 				pipex_process.c			\
@@ -33,7 +34,9 @@ SRCS		=	pipex.c					\
 
 SRCS_BN		=	./pipex_bonus/pipex_bonus.c			\
 				./pipex_bonus/pipex_utils_bonus.c	\
-				./pipex_bonus/pipex_process_bonus.c
+				./pipex_bonus/pipex_process_bonus.c	\
+				./pipex_bonus/get_next_line_bonus.c		\
+				./pipex_bonus/get_next_line_utils_bonus.c
 
 OBJS		= $(SRCS:.c=.o)
 

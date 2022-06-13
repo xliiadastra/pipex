@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:39:47 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 22:39:49 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 00:15:59 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ int	main(int argc, char *argv[], char **envp)
 	else
 		infile = open_frame(argv[1], READ);
 	dup_frame(infile, STDIN_FILENO);
-	outfile = open_frame(argv[argc - 1], WRITE);
+	if (ft_strncmp(argv[1], "here_doc", 8))
+		outfile = open_frame(argv[argc - 1], WRITE);
 	while (++i <= argc - 2)
 		fork_frame(argv[i], envp, argc, i, outfile);
 	while (--i > 1)
 		waitpid(-1, 0, 0);
+//	if (!access("infile_temp", F_OK))
+//		unlink("infile_temp");
 	return (0);
 }
