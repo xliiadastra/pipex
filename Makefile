@@ -6,7 +6,7 @@
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 15:18:40 by yichoi            #+#    #+#              #
-#    Updated: 2022/06/13 20:43:19 by yichoi           ###   ########.fr        #
+#    Updated: 2022/06/13 22:49:11 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ clean :
 
 .PHONY : fclean
 fclean : clean
-	$(RM) $(RMFLAGS) $(NAME) $(OBJS_BONUS)
+	$(RM) $(RMFLAGS) $(NAME) $(BNS_NAME)
 	@make fclean -C $(LIBFT)
 
 .PHONY : re

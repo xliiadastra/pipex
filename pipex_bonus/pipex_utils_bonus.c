@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:45:58 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 21:26:58 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 22:41:26 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_error(int mode)
 	if (mode == BAG)
 	{
 		write(2, "Error: Bad Arguments\n", 21);
-		write(2, "Example: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 46);
+		write(2, "Example: ./pipex infile \"cmd1\" \"cmd2\" ... \
+				\"cmdn\" outfile\n", 57);
+		write(2, "Example: ./pipex here_doc \"cmd1\" \"cmd2\" outfile\n", 48);
 		exit(1);
 	}
 }
@@ -56,7 +58,7 @@ void	fork_frame(char *argv, char **envp, int ac, int i, int outfile)
 		close(fd[0]);
 		if (i == ac - 2)
 			dup_frame(outfile, STDOUT_FILENO);
-		else 
+		else
 			dup_frame(fd[1], STDOUT_FILENO);
 		execvision(argv, envp);
 	}
@@ -69,7 +71,6 @@ void	fork_frame(char *argv, char **envp, int ac, int i, int outfile)
 
 void	dup_frame(int fd, int std)
 {
-
 	if (dup2(fd, std) == -1)
 		ft_error(ERR);
 	close(fd);

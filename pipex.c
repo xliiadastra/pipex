@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 17:31:16 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 22:42:13 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ int	main(int argc, char *argv[], char **envp)
 	if (pid == -1)
 		ft_error(ERR);
 	else if (pid == 0)
-		child_process(fd, argv, envp);
+		cmd1_process(fd, argv, envp);
 	pid2 = fork();
 	if (pid2 == -1)
 		ft_error(ERR);
 	else if (pid2 == 0)
-		parents_process(fd, argv, envp);
+		cmd2_process(fd, argv, envp);
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(-1, 0, 0);
 	waitpid(-1, 0, 0);
-	
 	return (0);
 }

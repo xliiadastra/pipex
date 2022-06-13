@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 17:57:50 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/09 18:03:25 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 22:24:26 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef enum e_error
 	BAG
 }	t_error;
 
-void	child_process(int fd[2], char *argv[], char **envp);
-void	parents_process(int fd[2], char *argv[], char **envp);
+void	cmd1_process(int fd[2], char *argv[], char **envp);
+void	cmd2_process(int fd[2], char *argv[], char **envp);
 void	execvision(char *argv, char **envp);
 char	*search_path(char *cmd, char **envp);
 void	ft_error(int mode);

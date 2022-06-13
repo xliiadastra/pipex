@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:42:19 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 21:27:08 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 22:40:20 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_error
 	BAG
 }	t_error;
 
-typedef enum  e_open
+typedef enum e_open
 {
 	READ,
 	WRITE,
@@ -40,8 +40,8 @@ void	fork_frame(char *argv, char **envp, int ac, int i, int outfile);
 int		open_frame(char *file, int mode);
 void	dup_frame(int fd, int std);
 
-void	child_process(int fd[2], char *argv[], char **envp);
-void	parents_process(int fd[2], char *argv[], char **envp);
+void	here_doc(int i, char *c, int argc);
+
 void	execvision(char *argv, char **envp);
 char	*search_path(char *cmd, char **envp);
 

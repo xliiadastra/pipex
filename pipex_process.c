@@ -6,13 +6,13 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 20:21:33 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 17:32:22 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 22:24:09 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_process(int fd[2], char *argv[], char **envp)
+void	cmd1_process(int fd[2], char *argv[], char **envp)
 {
 	int	infile;
 
@@ -29,7 +29,7 @@ void	child_process(int fd[2], char *argv[], char **envp)
 	execvision(argv[2], envp);
 }
 
-void	parents_process(int fd[2], char *argv[], char **envp)
+void	cmd2_process(int fd[2], char *argv[], char **envp)
 {
 	int	outfile;
 
@@ -57,8 +57,6 @@ void	execvision(char *argv, char **envp)
 	program_path = search_path(cmd[0], envp);
 	if (execve(program_path, cmd, envp) == -1)
 		ft_error(ERR);
-	str_isfree(cmd);
-	write(1, program_path, ft_strlen(program_path));
 }
 
 char	*search_path(char *cmd, char **envp)
