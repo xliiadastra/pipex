@@ -6,11 +6,11 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:45:58 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 17:44:46 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 21:26:58 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_error(int mode)
 {
@@ -41,7 +41,7 @@ void	str_isfree(char **str)
 	str = NULL;
 }
 
-void	fork_frame(char *argv, char **envp)
+void	fork_frame(char *argv, char **envp, int ac, int i, int outfile)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -54,7 +54,10 @@ void	fork_frame(char *argv, char **envp)
 	else if (pid == 0)
 	{
 		close(fd[0]);
-		dup_frame(fd[1], STDOUT_FILENO);
+		if (i == ac - 2)
+			dup_frame(outfile, STDOUT_FILENO);
+		else 
+			dup_frame(fd[1], STDOUT_FILENO);
 		execvision(argv, envp);
 	}
 	else
@@ -72,7 +75,7 @@ void	dup_frame(int fd, int std)
 	close(fd);
 }
 
-void	open_fream(char *file, int mode)
+int	open_frame(char *file, int mode)
 {
 	int	fd;
 
@@ -94,4 +97,5 @@ void	open_fream(char *file, int mode)
 		if (fd < 0)
 			ft_error(ERR);
 	}
+	return (fd);
 }

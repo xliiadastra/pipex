@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	main(int argc, char *argv[], char **envp)
 {
@@ -9,18 +9,22 @@ int	main(int argc, char *argv[], char **envp)
 	i = 1;
 	if (argc < 5)
 		ft_error(ERR);
-	if (!ft_strncmp(av[1], "here_doc", 8) && ++i)
-	{
-		outfile = open_file(argv[argc - 1], APPEND);
-		infile = open_file("pipex_temp", WRITE);
-		here_doc(infile, argv[2], argc);
-	}
-	else
-		infile = open_file(argv[1], READ);
-	while (argv[++i] <= argc - 2)
-		fork_frame(argv[i], envp);
+	//if (!ft_strncmp(argv[1], "here_doc", 8) && ++i)
+	//{
+	//	outfile = open_fream(argv[argc - 1], APPEND);
+	//	infile = open_fream("pipex_temp", WRITE);
+	//	here_doc(infile, argv[2], argc);
+	//}
+	//else
+	infile = open_frame(argv[1], READ);
 	dup_frame(infile, STDIN_FILENO);
+	
+	outfile = open_frame(argv[argc - 1], WRITE);
+	//dup_frame(outfile, STDOUT_FILENO);
+	while (++i <= argc - 2)
+		fork_frame(argv[i], envp, argc, i, outfile);
 	while (--i > 1)
-		waitpie(-1, 0, 0);
-	dup_fram(outfile, STDOUT_FILENO);
+		waitpid(-1, 0, 0);
+	
+	return (0);
 }

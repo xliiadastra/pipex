@@ -5,62 +5,68 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/09 18:31:45 by yichoi            #+#    #+#              #
-#    Updated: 2022/06/13 17:59:40 by yichoi           ###   ########.fr        #
+#    Created: 2021/11/24 15:18:40 by yichoi            #+#    #+#              #
+#    Updated: 2022/06/13 20:43:19 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+NAME		= pipex
 
-NAME = pipex
+BNS_NAME	= ./pipex_bonus/pipex
 
-BONUS_NAME = ./pipex_bonus/pipex
+LIBFT		= ./libft
 
-SRCS =	pipex.c		\
-		pipex_utils.c	\
-		pipex_process.c
-BONUS_SRCS = ./pipex_bonus/pipex_bonus.c			\
-			 ./pipex_bonus/pipex_utils_bonus.c		\
-			 ./pipex_bonus/pipex_process_bonus.c
+LIBFT_LIB	= libft.a
 
-OBJS = $(SRCS:%.c=%.o)
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
-BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)
+RM			= rm
+RMFLAGS		= -f
 
-HDR = ./pipex.h	\
-	  ./pipex_bonus/pipex_bonus.h
+INCLUDES	= ./pipex.h			\
+			  ./pipex_bonus/pipex_bonus.h
 
-LIB_DIR = ./libft
-LIB_NAME = ft
-LIB = $(LIB_DIR)/lib$(LIB_NAME).a
+SRCS		=	pipex.c					\
+				pipex_process.c			\
+				pipex_utils.c
 
-INCLUDES = -I$(HDR) -I$(LIB_DIR)
+SRCS_BN		=	./pipex_bonus/pipex_bonus.c			\
+				./pipex_bonus/pipex_utils_bonus.c	\
+				./pipex_bonus/pipex_process_bonus.c
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $(<:.c=.o)
+OBJS		= $(SRCS:.c=.o)
 
-all: $(NAME)
+OBJS_BONUS	= $(SRCS_BN:.c=.o)
 
-$(NAME):$(LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -L$(LIB_DIR) -l$(LIB_NAME) $(OBJS) -o $(NAME)
+.PHONY : all
+all : $(NAME)
 
-$(LIB):
-	make -C $(LIB_DIR) bonus
+.PHONY : bonus
+bonus: $(BNS_NAME)
 
-bonus: $(BONUS_NAME)
+%.o : %.c $(INCLUDES)
+	$(CC) $(CFLAGS) -c $< -o $@ -I./
 
-$(BONUS_NAME): $(LIB) $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -L$(LIB_DIR) -l$(LIB_NAME) $(BONUS_OBJS) -o $(BONUS_NAME)
+$(NAME) : $(OBJS)
+	@make -C $(LIBFT) 
+	$(CC) $(CFLAGS) -o $@ $^ -L $(LIBFT) -lft
 
-clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
-	make -C $(LIB_DIR) clean
+$(BNS_NAME): $(OBJS_BONUS)
+	@make -C $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $^ -L $(LIBFT) -lft
 
-fclean: clean
-	rm -f $(NAME) $(BONUS_NAME)
-	make -C $(LIB_DIR) fclean
+.PHONY : clean
+clean :
+	$(RM) $(RMFLAGS) $(OBJS) $(OBJS_BONUS)
+	@make clean -C $(LIBFT)
 
-re: fclean all
+.PHONY : fclean
+fclean : clean
+	$(RM) $(RMFLAGS) $(NAME) $(OBJS_BONUS)
+	@make fclean -C $(LIBFT)
 
-.PHONY: fclean all clean re bonus
+.PHONY : re
+re:
+	$(MAKE) fclean
+	$(MAKE) all
