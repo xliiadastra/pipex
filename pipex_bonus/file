@@ -1,1 +1,18 @@
 fuck ya
+	int	infile;
+	int	outfile;
+	int	i;
+	int	count;
+	i = 1;
+	count = 0;
+		ft_error(BAG);
+		outfile = open_frame(argv[argc - 1], APPEND);
+		infile = open_frame("infile_temp", WRITE);
+		here_doc(infile, argv[2], argc);
+		infile = open_frame(argv[1], READ);
+	dup_frame(infile, STDIN_FILENO);
+		outfile = open_frame(argv[argc - 1], WRITE);
+		fork_frame(argv[i], envp, argc, i, outfile);
+		waitpid(-1, 0, 0);
+		unlink("infile_temp");
+	return (0);

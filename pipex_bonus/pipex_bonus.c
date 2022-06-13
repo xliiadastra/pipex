@@ -17,8 +17,10 @@ int	main(int argc, char *argv[], char **envp)
 	int	infile;
 	int	outfile;
 	int	i;
+	int	count;
 
 	i = 1;
+	count = 0;
 	if (argc < 5)
 		ft_error(BAG);
 	if (!ft_strncmp(argv[1], "here_doc", 8) && ++i)
@@ -32,11 +34,11 @@ int	main(int argc, char *argv[], char **envp)
 	dup_frame(infile, STDIN_FILENO);
 	if (ft_strncmp(argv[1], "here_doc", 8))
 		outfile = open_frame(argv[argc - 1], WRITE);
-	while (++i <= argc - 2)
+	while ((++i <= argc - 2) && ++count)
 		fork_frame(argv[i], envp, argc, i, outfile);
-	while (--i > 1)
+	while (--count >= 0)
 		waitpid(-1, 0, 0);
-//	if (!access("infile_temp", F_OK))
-//		unlink("infile_temp");
+	if (!access("infile_temp", F_OK))
+		unlink("infile_temp");
 	return (0);
 }

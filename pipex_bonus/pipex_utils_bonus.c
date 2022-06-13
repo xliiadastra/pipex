@@ -43,7 +43,7 @@ void	str_isfree(char **str)
 	str = NULL;
 }
 
-void	fork_frame(char *argv, char **envp, int ac, int i, int outfile)
+void	fork_frame(char *argv, char **envp, int i, int ac, int outfile)
 {
 	int		fd[2];
 	pid_t	pid;
