@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 18:15:40 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/09 23:24:00 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:31:16 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int argc, char *argv[], char **envp)
 	close(fd[1]);
 	waitpid(-1, 0, 0);
 	waitpid(-1, 0, 0);
+	
 	return (0);
 }

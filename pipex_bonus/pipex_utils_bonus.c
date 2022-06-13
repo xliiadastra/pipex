@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:45:58 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/07 21:57:06 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:44:46 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,30 @@ void	str_isfree(char **str)
 	str = NULL;
 }
 
-void	fork_(int )
+void	fork_frame(char *argv, char **envp)
 {
+	int		fd[2];
 	pid_t	pid;
 
+	if (pipe(fd) == -1)
+		ft_error(ERR);
 	pid = fork();
 	if (pid == -1)
 		ft_error(ERR);
 	else if (pid == 0)
+	{
+		close(fd[0]);
+		dup_frame(fd[1], STDOUT_FILENO);
+		execvision(argv, envp);
+	}
+	else
+	{
+		close(fd[1]);
+		dup_frame(fd[0], STDIN_FILENO);
+	}
 }
 
-void	dup_(int fd, int std)
+void	dup_frame(int fd, int std)
 {
 
 	if (dup2(fd, std) == -1)
@@ -59,7 +72,7 @@ void	dup_(int fd, int std)
 	close(fd);
 }
 
-void	open_file(char *file, int mode)
+void	open_fream(char *file, int mode)
 {
 	int	fd;
 

@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 20:21:33 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/09 22:02:53 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:32:22 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	execvision(char *argv, char **envp)
 	if (execve(program_path, cmd, envp) == -1)
 		ft_error(ERR);
 	str_isfree(cmd);
-	free(program_path);
+	write(1, program_path, ft_strlen(program_path));
 }
 
 char	*search_path(char *cmd, char **envp)

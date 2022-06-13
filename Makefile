@@ -6,7 +6,7 @@
 #    By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/09 18:31:45 by yichoi            #+#    #+#              #
-#    Updated: 2022/06/09 18:37:41 by yichoi           ###   ########.fr        #
+#    Updated: 2022/06/13 17:59:40 by yichoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,18 +15,21 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = pipex
 
-BONUS_NAME =
+BONUS_NAME = ./pipex_bonus/pipex
 
 SRCS =	pipex.c		\
 		pipex_utils.c	\
 		pipex_process.c
-BONUS_SRCS = 
+BONUS_SRCS = ./pipex_bonus/pipex_bonus.c			\
+			 ./pipex_bonus/pipex_utils_bonus.c		\
+			 ./pipex_bonus/pipex_process_bonus.c
 
 OBJS = $(SRCS:%.c=%.o)
 
 BONUS_OBJS = $(BONUS_SRCS:%.c=%.o)
 
-HDR = ./includes
+HDR = ./pipex.h	\
+	  ./pipex_bonus/pipex_bonus.h
 
 LIB_DIR = ./libft
 LIB_NAME = ft
