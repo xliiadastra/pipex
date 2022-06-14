@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:45:58 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 22:41:26 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 18:05:37 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	str_isfree(char **str)
 	str = NULL;
 }
 
-void	fork_frame(char *argv, char **envp, int i, int ac, int outfile)
+void	fork_frame(char *argv, char **envp, int outfile, int mode)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -56,7 +56,7 @@ void	fork_frame(char *argv, char **envp, int i, int ac, int outfile)
 	else if (pid == 0)
 	{
 		close(fd[0]);
-		if (i == ac - 2)
+		if (mode == END)
 			dup_frame(outfile, STDOUT_FILENO);
 		else
 			dup_frame(fd[1], STDOUT_FILENO);

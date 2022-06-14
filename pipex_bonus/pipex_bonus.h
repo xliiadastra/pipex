@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:42:19 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/13 23:54:37 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 18:06:03 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,20 @@ typedef enum e_open
 	APPEND
 }	t_open;
 
+typedef enum e_fork
+{
+	END,
+	CONTINUE
+}	t_fork;
+
+void	delete_temp(void);
+void	bad_argc(int argv);
+void	get_process(char *argv[], char **envp, int outfile, int i);
+
 void	ft_error(int mode);
 void	str_isfree(char **str);
-void	fork_frame(char *argv, char **envp, int ac, int i, int outfile);
+
+void	fork_frame(char *argv, char **envp, int outfile, int mode);
 int		open_frame(char *file, int mode);
 void	dup_frame(int fd, int std);
 
