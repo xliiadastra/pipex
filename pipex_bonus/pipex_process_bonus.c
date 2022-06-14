@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 20:21:33 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/14 00:14:59 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 20:00:01 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	here_doc(int fd, char *limiter, int argc)
 		free(ptr);
 	}
 	close(fd);
-	fd = open("infile_temp", O_RDONLY, 0777);
+	fd = open_frame("infile_temp", READ);
 }
 
 void	execvision(char *argv, char **envp)

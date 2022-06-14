@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:45:58 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/14 18:05:37 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 19:57:26 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,19 @@ int	open_frame(char *file, int mode)
 	if (mode == READ)
 	{
 		fd = open(file, O_RDONLY, 0777);
-		if (fd < 0)
+		if (fd == -1)
 			ft_error(ERR);
 	}
 	else if (mode == WRITE)
 	{
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-		if (fd < 0)
+		if (fd == -1)
 			ft_error(ERR);
 	}
 	else
 	{
-		fd = open(file, O_APPEND, 0777);
-		if (fd < 0)
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		if (fd == -1)
 			ft_error(ERR);
 	}
 	return (fd);

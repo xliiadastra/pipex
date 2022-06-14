@@ -6,29 +6,28 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 22:39:47 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/14 18:05:34 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 19:47:38 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	delete_temp(void)
-{
-	if (!access("infile_temp", F_OK))
-		unlink("infile_temp");
-}
-
-void	bad_argc(int argv)
+void	bad_argc(int argc)
 {
 	if (argc < 5)
 		ft_error(BAG);
 }
 
-void	get_process(char *argv[], char **envp, int outfile, int i)
+void	get_process(int argc, char *argv[], char **envp, int outfile)
 {
 	int	count;
+	int	i;
 
 	count = 0;
+	if (!ft_strncmp(argv[1], "here_doc", 8))
+		i = 2;
+	else
+		i = 1;
 	while ((++i <= argc - 2) && ++count)
 	{
 		if (i == argc - 2)
@@ -44,13 +43,9 @@ int	main(int argc, char *argv[], char **envp)
 {
 	int	infile;
 	int	outfile;
-	int	i;
-	int	count;
 
-	i = 1;
-	count = 0;
 	bad_argc(argc);
-	if (!ft_strncmp(argv[1], "here_doc", 8) && ++i)
+	if (!ft_strncmp(argv[1], "here_doc", 8))
 	{
 		outfile = open_frame(argv[argc - 1], APPEND);
 		infile = open_frame("infile_temp", WRITE);
@@ -61,7 +56,8 @@ int	main(int argc, char *argv[], char **envp)
 	dup_frame(infile, STDIN_FILENO);
 	if (ft_strncmp(argv[1], "here_doc", 8))
 		outfile = open_frame(argv[argc - 1], WRITE);
-	get_process(argv, envp, outfile, i);
-	delete_temp(void);
+	get_process(argc, argv, envp, outfile);
+	if (!access("infile_temp", F_OK))
+		unlink("infile_temp");
 	return (0);
 }

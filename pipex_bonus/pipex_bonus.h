@@ -6,7 +6,7 @@
 /*   By: yichoi <yichoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 17:42:19 by yichoi            #+#    #+#             */
-/*   Updated: 2022/06/14 18:06:03 by yichoi           ###   ########.fr       */
+/*   Updated: 2022/06/14 18:33:27 by yichoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ typedef enum e_fork
 	CONTINUE
 }	t_fork;
 
-void	delete_temp(void);
 void	bad_argc(int argv);
-void	get_process(char *argv[], char **envp, int outfile, int i);
+void	get_process(int argc, char *argv[], char **envp, int outfile);
 
 void	ft_error(int mode);
 void	str_isfree(char **str);
